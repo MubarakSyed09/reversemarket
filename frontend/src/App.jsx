@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { SocketProvider } from './context/SocketContext';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
+import LandingPage from './pages/LandingPage';
 import BuyerDashboard from './pages/BuyerDashboard';
 import SupplierMarket from './pages/SupplierMarket';
 import RFQDetailView from './pages/RFQDetailView';
@@ -11,13 +12,17 @@ import LiveAuctionModal from './components/LiveAuctionModal';
 
 const MainApp = () => {
   const { user } = useAuth();
+  const [showLogin, setShowLogin] = useState(false);
   const [activeTab, setActiveTab] = useState(user?.role === 'seller' ? 'supplier' : 'buyer');
   const [selectedRFQ, setSelectedRFQ] = useState(null);
   const [auctionRFQ, setAuctionRFQ] = useState(null);
 
-  // If not authenticated, show the Login Page (matching user reference mockup)
+  // If not authenticated, show Landing Page by default or Login Page when requested
   if (!user) {
-    return <LoginPage />;
+    if (showLogin) {
+      return <LoginPage onBack={() => setShowLogin(false)} />;
+    }
+    return <LandingPage onLogin={() => setShowLogin(true)} />;
   }
 
   const handleViewRFQ = (rfq) => {

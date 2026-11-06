@@ -17,7 +17,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-const LoginPage = () => {
+const LoginPage = ({ onBack }) => {
   const { login, register, loading } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -90,7 +90,11 @@ const LoginPage = () => {
       {/* Top Header Navbar */}
       <header className="relative z-20 max-w-7xl w-full mx-auto px-6 sm:px-10 py-6 flex items-center justify-between">
         {/* Brand Logo with Cart */}
-        <div className="flex items-center gap-2.5 cursor-pointer">
+        <div 
+          onClick={onBack} 
+          className={`flex items-center gap-2.5 ${onBack ? 'cursor-pointer hover:opacity-85 transition-opacity' : 'cursor-default'}`}
+          title={onBack ? "Back to Home" : undefined}
+        >
           <div className="w-8 h-8 text-brand-600 flex items-center justify-center">
             <svg className="w-7 h-7 fill-brand-600" viewBox="0 0 24 24">
               <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
@@ -101,11 +105,21 @@ const LoginPage = () => {
           </span>
         </div>
 
-        {/* Top Right Tagline */}
-        <div className="text-right">
-          <span className="text-xs sm:text-sm font-bold text-gray-800 italic tracking-wide">
-            Smart Trading. <span className="border-b-2 border-brand-500 pb-0.5">Better Deals.</span>
-          </span>
+        {/* Top Right Tagline & Optional Back Link */}
+        <div className="flex items-center gap-4">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="text-xs font-bold text-brand-600 hover:text-brand-700 bg-white/90 hover:bg-white px-3 py-1.5 rounded-full border border-rose-200/90 shadow-xs transition-all flex items-center gap-1 cursor-pointer"
+            >
+              ← Back to Home
+            </button>
+          )}
+          <div className="text-right hidden sm:block">
+            <span className="text-xs sm:text-sm font-bold text-gray-800 italic tracking-wide">
+              Smart Trading. <span className="border-b-2 border-brand-500 pb-0.5">Better Deals.</span>
+            </span>
+          </div>
         </div>
       </header>
 
