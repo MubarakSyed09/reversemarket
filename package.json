@@ -1,0 +1,26 @@
+{
+  "name": "reversemarket",
+  "version": "1.0.0",
+  "description": "Demand-Driven B2B Reverse Procurement Marketplace with Real-Time Reverse Auctions & Milestone Escrow",
+  "main": "backend/src/server.js",
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "start": "node backend/src/server.js",
+    "seed": "node backend/seed.js",
+    "dev:backend": "node --watch backend/src/server.js",
+    "dev:frontend": "npm run dev --prefix frontend"
+  },
+  "keywords": [
+    "b2b",
+    "procurement",
+    "reverse-auction",
+    "escrow",
+    "upi",
+    "marketplace",
+    "websockets"
+  ],
+  "author": "ReverseMarket Team",
+  "license": "MIT"
+}

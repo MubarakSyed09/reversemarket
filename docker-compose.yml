@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongo:27017/reversemarket
+      - JWT_SECRET=reversemarket_prod_super_secret_2026
+      - NODE_ENV=production
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:6-jammy
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
